@@ -1,0 +1,335 @@
+aid: pseg
+name: PSEG
+review:
+  question: >-
+    Does PSEG publish a public developer portal or any documented API through
+    which a third party can obtain customer energy data or open grid/market
+    data?
+  answer: false
+  date: '2026-07-27'
+  reviewer: API Evangelist
+  tier: utility-retailer
+  homeMarket: United States
+  primaryDomain: pseg.com
+
+energyDataPosture:
+  homeMarket: United States
+  serviceTerritories:
+    - New Jersey (PSE&G — regulated electric and gas distribution)
+    - Long Island and the Rockaways, New York (PSEG Long Island — operates the
+      T&D system under contract to the Long Island Power Authority)
+  wholesaleMarket: >-
+    PJM Interconnection. PSEG is a market participant, not a market operator —
+    the open wholesale/market data for this territory is published by PJM (Data
+    Miner) and the U.S. EIA, not by PSEG. Nothing PSEG publishes was found to
+    duplicate it.
+
+  mandateRegime: green-button-voluntary
+  mandateRegimeNote: >-
+    There is no United States federal consumer energy data mandate. The Green
+    Button / NAESB REQ.21 ESPI standard exists and is adopted voluntarily. The
+    one complicating fact, recorded here so it is not lost: the New Jersey Board
+    of Public Utilities' AMI proceeding for PSE&G directs meter data sharing
+    referencing the Green Button Standard with non-discriminatory third-party
+    access. That is a STATE regulatory direction, not a federal mandate and not
+    a consumer data right of the Australian CDR or Ontario Green Button kind, so
+    the honest bucket remains green-button-voluntary. A stricter reading could
+    file this as `other` (state PUC AMI order); it is emphatically not
+    green-button-ontario and not cdr-energy.
+
+  mandateStatus: live-claimed-unverified
+  mandateStatusNote: >-
+    Separating the claim from the implementation, which is the whole point of
+    this record:
+      * CLAIMED AND DOCUMENTED — Green Button Download My Data. PSEG Long
+        Island's public MySmartEnergy FAQ states verbatim: "Yes, you can
+        download data information in CSV or Green Button (.XML) format. Just
+        choose the time interval and date range."
+        (https://www.psegliny.com/myaccount/serviceandrates/mysmartenergy, HTTP
+        200 on 2026-07-27). This is a file export reachable only after logging
+        in to a customer account, so it could NOT be verified anonymously. No
+        Green Button Alliance certification listing for PSEG, PSE&G, or PSEG
+        Long Island was found; greenbuttonalliance.org/certified and
+        /certified-products both returned HTTP 404 and
+        greenbuttondata.org/utilities.html (HTTP 200) names no PSEG entity.
+      * VERIFIABLY ABSENT — Green Button Connect My Data. No OAuth authorization
+        server, no ESPI /DataCustodian or /espi/1_1/resource base URI, and no
+        third-party registration path was found on any PSEG host. In the New
+        Jersey BPU AMI docket PSE&G's own position was that a third party
+        seeking interval data for many residential accounts must have each
+        customer manually log in and add that third party as a secondary user —
+        i.e. no programmatic or bulk mechanism — with the alternatives being a
+        signed Letter of Authorization answered with spreadsheet files by email,
+        and EDI plus web portal for BPU-licensed third-party suppliers.
+      * PSEG Long Island proposed supporting Green Button Connect My Data in its
+        2018 Utility 2.0 Long Range Plan; no live CMD surface was found in 2026.
+    A compliance page, a rate-case commitment, and a regulator's order are all
+    recorded here as claims. None of them is an implementation.
+
+  dataStandard: >-
+    Green Button / NAESB REQ.21 ESPI, Download My Data profile only, as a
+    CSV/XML file export from the MySmartEnergy (MyMeter) portal. No ESPI version
+    is published. No Connect My Data. No OpenADR, IEEE 2030.5, OCPP/OCPI, or
+    IEC CIM 61968/61970 reference found on any PSEG property. For third-party
+    energy suppliers the interchange is legacy retail-choice EDI, not a modern
+    API.
+
+  consumerDataAPI:
+    available: false
+    note: >-
+      A third party cannot obtain an individual PSEG customer's usage or billing
+      data through any documented API. The routes that exist are (1) the
+      customer downloads a CSV or Green Button XML file themselves, (2) the
+      customer adds the third party as a view-only secondary user inside
+      MySmartEnergy/MyMeter, (3) a signed Letter of Authorization returned as
+      emailed spreadsheets, (4) EDI for BPU-licensed suppliers. All four are
+      human-mediated. None is an API.
+    portals:
+      - url: https://mysmartenergy.nj.pseg.com/
+        status: 200
+        note: >-
+          MyMeter for PSE&G New Jersey. Operated by Accelerated Innovations, LLC
+          (branded MyMeter, v10.5.1.5). Anonymous landing page mentions no Green
+          Button, no download, no API.
+      - url: https://mysmartenergy.psegliny.com/
+        status: 200
+        note: MySmartEnergy for PSEG Long Island, same MyMeter platform.
+      - url: https://mysmartenergy.nj.pseg.com/WholeBuilding/RequestOwnerPermission
+        status: 200
+        note: >-
+          Whole-building aggregated usage request. A web form requiring building
+          owner permission, not an API.
+      - url: https://nj.myaccount.pseg.com/
+        status: 200
+        note: Redirects to /user/login. Customer account login, not a developer portal.
+
+  marketDataOpen:
+    available: false
+    note: >-
+      PSEG publishes no open grid, market, or system data API. The two public
+      real-time surfaces are outage maps, and both are vendor-hosted KUBRA
+      StormCenter single-page applications loading from kubra.io with an
+      instanceId/viewId pair — an embedded product, not a PSEG-published data
+      API, with no documentation, no terms of use for data, and no stable
+      contract. Open data for this footprint comes from PJM and the U.S. EIA.
+    probes:
+      - url: https://outagecenter.pseg.com/
+        status: 200
+        note: >-
+          "PSE&G NJ Outage Map", KUBRA StormCenter 5.52.0, host https://kubra.io,
+          instanceId 79d82478-c10a-4956-a045-89de3cda618c.
+      - url: https://outagemap.psegliny.com/
+        status: 200
+        note: >-
+          "PSEG Long Island My Power Map", KUBRA StormCenter 5.52.0,
+          instanceId 48006d55-45bb-40a4-99a6-1289326f0d0d.
+      - url: https://outagemap.pseg.com/
+        status: 000
+        note: Does not resolve.
+
+  accessGate: customer-account-required
+  accessGateNote: >-
+    What a developer actually has to do to get in: nothing works. There is no
+    signup, no key, no application form, no sandbox and no published contact for
+    API access anywhere on pseg.com, nj.pseg.com, corporate.pseg.com, or
+    psegliny.com. The only way to reach PSEG energy data is to BE a PSE&G or
+    PSEG Long Island customer and log in at nj.myaccount.pseg.com, then export a
+    CSV or Green Button XML file from MyMeter/MySmartEnergy, or to be added by
+    that customer as a view-only secondary user. Acting for many customers means
+    a Letter of Authorization and spreadsheets by email, or BPU third-party
+    supplier licensure and EDI — a regulatory relationship, not developer
+    onboarding.
+
+  authModel: >-
+    No developer authentication model exists because there is no developer
+    surface. Customer access is username/password session login at
+    nj.myaccount.pseg.com. No OAuth 2.0 authorization server, no API keys, no
+    mTLS, no OpenID Connect discovery document was served:
+    /.well-known/openid-configuration on www.pseg.com, nj.pseg.com,
+    nj.myaccount.pseg.com and outagecenter.pseg.com returned the site's
+    soft-404 or SPA fallback rather than JSON, and on
+    mysmartenergy.nj.pseg.com returned a hard HTTP 404.
+
+probes:
+  note: >-
+    All probes run 2026-07-27 with a browser user agent, following redirects.
+    IMPORTANT: pseg.com, nj.pseg.com, and corporate.pseg.com serve a soft 404 —
+    unknown paths return HTTP 200 with a CommonError404 landing page — so status
+    code alone is not evidence a path exists. Each such case is marked below.
+  developerSurfaces:
+    - url: https://developer.pseg.com/
+      status: 000
+      note: Does not resolve.
+    - url: https://developers.pseg.com/
+      status: 000
+      note: Does not resolve.
+    - url: https://api.pseg.com/
+      status: 000
+      note: Does not resolve.
+    - url: https://docs.pseg.com/
+      status: 000
+      note: Does not resolve.
+    - url: https://data.pseg.com/
+      status: 000
+      note: Does not resolve.
+    - url: https://www.pseg.com/developers
+      status: 200
+      note: Soft 404 — redirects to landing.pseg.com/CommonError404. Not a real page.
+    - url: https://www.pseg.com/developer
+      status: 200
+      note: Soft 404 — CommonError404.
+    - url: https://www.pseg.com/api
+      status: 200
+      note: Soft 404 — CommonError404.
+    - url: https://www.pseg.com/docs
+      status: 200
+      note: Soft 404 — CommonError404.
+    - url: https://www.pseg.com/data
+      status: 200
+      note: Soft 404 — CommonError404.
+    - url: https://www.pseg.com/api-docs
+      status: 200
+      note: Soft 404 — CommonError404.
+    - url: https://myenergyanalyzer.pseg.com/
+      status: 000
+      note: >-
+        Referenced by third parties as PSE&G's "Energy Analyzer"; the host does
+        not resolve as of the probe date.
+  specDiscovery:
+    - url: https://www.pseg.com/openapi.json
+      status: 404
+    - url: https://www.pseg.com/swagger.json
+      status: 404
+    - url: https://nj.pseg.com/openapi.json
+      status: 404
+    - url: https://corporate.pseg.com/openapi.json
+      status: 404
+    - url: https://nj.pseg.com/NJ-Public_sitemap.xml
+      status: 200
+      note: >-
+        552 URLs harvested and grepped for developer/api/green/data/usage/meter
+        terms. Only hits were data-center service pages and net metering. No
+        developer, API, Green Button, or open data page exists in the sitemap.
+  greenButtonVerification:
+    - url: https://www.greenbuttonalliance.org/certification
+      status: 200
+    - url: https://www.greenbuttonalliance.org/certified
+      status: 404
+    - url: https://www.greenbuttonalliance.org/certified-products
+      status: 404
+    - url: https://www.greenbuttonalliance.org/registry
+      status: 404
+    - url: https://www.greenbuttondata.org/utilities.html
+      status: 200
+      note: No PSEG, PSE&G, or New Jersey utility named.
+    - url: https://nj.pseg.com/greenbutton
+      status: 200
+      note: Soft 404 — CommonError404. No Green Button page on the NJ site.
+    - url: https://www.pseg.com/greenbutton
+      status: 200
+      note: Soft 404 — CommonError404.
+  thirdPartyAggregators:
+    - url: https://utilityapi.com/coverage
+      status: 200
+      note: Coverage table not rendered to anonymous fetch; PSEG not confirmed either way.
+    - url: https://utilityapi.com/docs/utilities
+      status: 200
+      note: >-
+        22 utilities listed (AEPIM through WELLAND). No PSEG, PSE&G, or PSEG
+        Long Island entry.
+  codeAndOrgs:
+    - url: https://api.github.com/orgs/pseg
+      status: 404
+      note: No PSEG GitHub organization. No first-party open source or specs.
+    - url: https://www.linkedin.com/company/pseg
+      status: 200
+
+findings:
+  summary: >-
+    PSEG is the clean negative case for the energy sector's central question. A
+    regulator can point at the Green Button Standard and a utility can ship a
+    Green Button file, and neither event produces an API. PSEG Long Island
+    documents a Green Button (.XML) download inside a logged-in customer portal
+    — Download My Data, the one-customer, one-file half of the standard — while
+    the Connect My Data half that would let a third party call for a consented
+    customer's interval data does not exist, by PSE&G's own account in the New
+    Jersey BPU AMI docket, where the answer to an aggregator asking for
+    thousands of accounts was that each customer must log in and add them
+    manually. Both halves of the sector are closed here: consumer data is behind
+    a login and a Letter of Authorization, and grid data is a KUBRA-hosted
+    outage widget. The open data for this territory belongs to PJM and the EIA,
+    not to the utility that operates the wires.
+  developerPortal: none
+  apisListed: 0
+  openapiHarvested: false
+  specsCount: 0
+
+duplicates:
+  - repo: /Users/kinlane/GitHub/all/public-service-enterprise
+    note: >-
+      An existing api-evangelist profile for the same company
+      (aid public-service-enterprise, "Public Service Enterprise Group",
+      created 2026-03-21) is already in the network with 0 APIs listed and the
+      same conclusion — no public developer APIs. Flagged here for the duplicate
+      provider retirement process; this repo is the energy-sector-seam profile
+      under the pseg slug.
+
+assets:
+  image: >-
+    https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/pseg.png —
+    slug-convention icon path, not yet populated (HTTP 403 on 2026-07-27),
+    pending the icon backfill job.
+
+sources:
+- url: https://www.psegliny.com/myaccount/serviceandrates/mysmartenergy
+  type: Documentation
+  status: 200
+  note: >-
+    The single strongest Green Button evidence found. Quotes the CSV / Green
+    Button (.XML) download and secondary-user sharing; states no bulk download
+    across multiple accounts.
+- url: https://nj.myaccount.pseg.com/myservicepublic/smartmeters
+  type: Documentation
+  status: 200
+  note: >-
+    PSE&G NJ smart meter page. Describes MyMeter, 15-minute to monthly interval
+    views and "easily download electric usage data" without naming a format, and
+    states "PSE&G will not sell this data to third parties." No API mentioned.
+- url: https://mysmartenergy.nj.pseg.com/
+  type: Portal
+  status: 200
+  note: MyMeter for PSE&G NJ, powered by Accelerated Innovations, LLC.
+- url: https://mysmartenergy.psegliny.com/
+  type: Portal
+  status: 200
+  note: MySmartEnergy for PSEG Long Island, same MyMeter platform.
+- url: https://outagecenter.pseg.com/
+  type: Website
+  status: 200
+  note: KUBRA StormCenter outage map, kubra.io hosted, no documented data API.
+- url: https://outagemap.psegliny.com/
+  type: Website
+  status: 200
+  note: KUBRA StormCenter outage map for PSEG Long Island.
+- url: https://www.greenbuttondata.org/utilities.html
+  type: Reference
+  status: 200
+  note: Green Button utility status page; no PSEG entity named.
+- url: https://utilityapi.com/docs/utilities
+  type: Reference
+  status: 200
+  note: >-
+    UtilityAPI's documented utility list does not include PSEG — corroborates
+    the absence of a programmatic data path into this territory.
+- url: https://en.wikipedia.org/wiki/Public_Service_Enterprise_Group
+  type: Reference
+  note: Corporate identity, subsidiaries, and service territory.
+
+actions:
+  apisYmlCreated: true
+  readmeCreated: true
+  openapiDirCreated: false
+  reason: >-
+    No OpenAPI, AsyncAPI, Postman collection, GraphQL schema, or any other
+    machine-readable contract exists on any PSEG property. The openapi/
+    directory is deliberately omitted rather than created empty.
