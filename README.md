@@ -36,13 +36,30 @@ No public APIs are documented by PSEG. See [review.yml](review.yml) for every UR
 - **Access gate:** `customer-account-required` — no signup, no keys, no application form, no sandbox. You must be a customer and log in at `nj.myaccount.pseg.com`.
 - **Auth model:** Session login only. No OAuth 2.0, no API keys, no mTLS, and no OpenID Connect discovery document served on any probed host.
 
+## Artifacts
+
+Everything below is a probe record. Nothing was generated to fill a gap.
+
+- [`well-known/pseg-well-known.yml`](well-known/pseg-well-known.yml) — eight hosts × the full `/.well-known/` discovery set. **Result: none.** Read the note: the Sitecore-hosted PSEG sites answer extensionless `/.well-known/` paths with HTTP 200 and an HTML page, a soft 404. Every 200 was opened and confirmed to be HTML, never a document. No `WellKnown` pointer is wired in `apis.yml`, because there is no well-known surface to point at.
+- [`packages/pseg-packages.yml`](packages/pseg-packages.yml) — zero first-party SDKs. `github.com/PSEGLI` is a genuine PSEG Long Island GitHub organization (contact `DL-PSEGLI-GitHub-Support@pseg.com`, created 2018) with **zero public repositories**; there is no parent-company org. The only code that exists is community work that logs in as the customer: the PyPI `pseg` gas-meter utility (unmaintained since 2019) and the `ha-psegli` Home Assistant integration (actively maintained).
+- [`security/pseg-domain-security.yml`](security/pseg-domain-security.yml) — TLS 1.3, HSTS with a one-year max-age, SPF and DMARC at `p=reject` on both `pseg.com` and `psegliny.com`; no DNSSEC and no CAA on either. Solid mail and transport hygiene, no DNS hardening.
+- [`llms/pseg-llms.txt`](llms/pseg-llms.txt) — generated, because PSEG serves no `/llms.txt` on any host. Written for the agent that arrives looking for a PSEG API: it leads with what does not exist, then the four human-mediated routes to customer data, then points at PJM and the EIA for the data that is actually open.
+
+No vulnerability-disclosure policy, bug bounty or trust center was found — `/security`, `/cybersecurity` and `/responsible-disclosure` all soft-404, no `security.txt` on any host, and no HackerOne/Bugcrowd/Intigriti program. Nothing was written for those rather than record an absence as a program.
+
 ## Properties
 
 - [Website](https://www.pseg.com/)
+- [Website — PSEG Long Island](https://www.psegliny.com/)
 - [About](https://corporate.pseg.com/)
 - [Blog](https://corporate.pseg.com/newsroom)
 - [LinkedIn](https://www.linkedin.com/company/pseg)
+- [GitHubOrganization](https://github.com/PSEGLI) — PSEG Long Island, zero public repositories
 - [Login](https://nj.myaccount.pseg.com/user/login)
+- [Support](https://nj.myaccount.pseg.com/customersupport) — PSE&G New Jersey
+- [Support](https://www.psegliny.com/en/myaccount/customersupport) — PSEG Long Island
+- [TermsOfService / PrivacyPolicy](https://corporate.pseg.com/websitetermsandconditions) — both live on one page; the privacy policy was last updated 2025-01-15
+- [Rates](https://nj.pseg.com/aboutpseg/regulatorypage/electrictariffs) — filed electric tariffs, not data
 - [Documentation](https://www.psegliny.com/myaccount/serviceandrates/mysmartenergy) — MySmartEnergy FAQ, the Green Button (.XML) download reference
 - [Documentation](https://nj.myaccount.pseg.com/myservicepublic/smartmeters) — PSE&G NJ smart meters and MyMeter
 

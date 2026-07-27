@@ -1,0 +1,102 @@
+generated: '2026-07-27'
+method: probed
+source: live anonymous HTTP probes, 2026-07-27
+result: >-
+  none — PSEG serves no /.well-known/ discovery document on any host in this profile. No
+  security.txt, no OpenID Connect discovery, no OAuth authorization-server metadata, no
+  api-catalog, no ai-plugin.json.
+note: >-
+  READ THE STATUS CODES WITH CARE. The Sitecore-hosted PSEG properties (www.pseg.com,
+  corporate.pseg.com, nj.pseg.com, nj.myaccount.pseg.com, www.psegliny.com) return HTTP 200 with
+  the site's full HTML page for /.well-known/openid-configuration, /.well-known/oauth-authorization-server
+  and /.well-known/api-catalog — an extensionless-path soft 404, not a document. Paths with a file
+  extension (security.txt, ai-plugin.json) return a real HTTP 404 with the 103-byte "The resource
+  you are looking for has been removed" body. Every 200 below was opened and confirmed to be
+  HTML, never JSON or RFC 9116 text. outagecenter.pseg.com is a KUBRA StormCenter single-page app
+  that answers every path with the same 1,878-byte SPA shell. No raw files were saved because
+  nothing returned a real document. This is verified absence, not an untested gap.
+hosts:
+- host: https://www.pseg.com
+  role: Corporate and customer web front door
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 200, body: html, note: soft 404 — site page, not JSON}
+  - {path: /.well-known/oauth-authorization-server, status: 200, body: html, note: soft 404 — site page, not JSON}
+  - {path: /.well-known/api-catalog, status: 200, body: html, note: soft 404 — site page, not JSON}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /llms.txt, status: 404}
+  - {path: /robots.txt, status: 200, note: "allows all; declares sitemap https://nj.pseg.com/NJ-Public_sitemap.xml"}
+- host: https://corporate.pseg.com
+  role: Corporate site — About, Newsroom, Careers, Website Terms & Conditions and Privacy Policy
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 200, body: html, note: soft 404}
+  - {path: /.well-known/oauth-authorization-server, status: 200, body: html, note: soft 404}
+  - {path: /.well-known/api-catalog, status: 200, body: html, note: soft 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /llms.txt, status: 404}
+- host: https://nj.pseg.com
+  role: PSE&G New Jersey customer site
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 200, body: html, note: soft 404}
+  - {path: /.well-known/oauth-authorization-server, status: 200, body: html, note: soft 404}
+  - {path: /.well-known/api-catalog, status: 200, body: html, note: soft 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /llms.txt, status: 404}
+  - {path: /robots.txt, status: 200}
+- host: https://nj.myaccount.pseg.com
+  role: PSE&G New Jersey customer account login — the only authenticated surface
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 200, body: html, note: "soft 404 — no OIDC discovery; the login is a session form, not an OpenID Connect provider"}
+  - {path: /.well-known/oauth-authorization-server, status: 200, body: html, note: soft 404 — no RFC 8414 metadata}
+  - {path: /.well-known/api-catalog, status: 200, body: html, note: soft 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+- host: https://www.psegliny.com
+  role: PSEG Long Island customer site
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 200, body: html, note: soft 404}
+  - {path: /.well-known/oauth-authorization-server, status: 200, body: html, note: soft 404}
+  - {path: /.well-known/api-catalog, status: 200, body: html, note: soft 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /llms.txt, status: 404}
+  - {path: /robots.txt, status: 404}
+- host: https://mysmartenergy.nj.pseg.com
+  role: MyMeter usage portal for PSE&G NJ (Accelerated Innovations, LLC)
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  note: >-
+    Hard 404 with an empty body on every path — this host does not soft-404, so the absence here
+    is unambiguous. This is the host that serves the Green Button (.XML) Download My Data export
+    behind the customer login, and it advertises no discovery surface at all.
+- host: https://mysmartenergy.psegliny.com
+  role: MySmartEnergy usage portal for PSEG Long Island (same MyMeter platform)
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+- host: https://outagecenter.pseg.com
+  role: KUBRA StormCenter outage map (vendor-hosted single-page application)
+  documents:
+  - {path: /.well-known/security.txt, status: 200, body: html, note: SPA fallback — every path returns the same 1878-byte shell}
+  - {path: /.well-known/openid-configuration, status: 200, body: html, note: SPA fallback}
+  - {path: /.well-known/oauth-authorization-server, status: 200, body: html, note: SPA fallback}
+  - {path: /.well-known/api-catalog, status: 200, body: html, note: SPA fallback}
+  - {path: /.well-known/ai-plugin.json, status: 200, body: html, note: SPA fallback}
+  - {path: /robots.txt, status: 200, body: html, note: SPA fallback — not a robots.txt}
+security_txt:
+  present: false
+  note: >-
+    No RFC 9116 security.txt on any PSEG host, and no responsible-disclosure or bug-bounty page was
+    found at /security, /cybersecurity, /responsible-disclosure on corporate.pseg.com or
+    www.pseg.com (all soft-404 to CommonError404). No HackerOne, Bugcrowd or Intigriti program for
+    PSEG was found. Consequently no security/pseg-vulnerability-disclosure.yml is written — there is
+    nothing real to record.

@@ -40,16 +40,43 @@ modified: '2026-07-27'
 specificationVersion: '0.19'
 apis: []
 common:
+- type: DomainSecurity
+  url: security/pseg-domain-security.yml
+- type: Packages
+  url: packages/pseg-packages.yml
+  name: No first-party SDKs; two community packages recorded
+- type: LLMsTxt
+  url: llms/pseg-llms.txt
 - type: Website
   url: https://www.pseg.com/
+- type: Website
+  url: https://www.psegliny.com/
+  name: PSEG Long Island
 - type: About
   url: https://corporate.pseg.com/
 - type: Blog
   url: https://corporate.pseg.com/newsroom
 - type: LinkedIn
   url: https://www.linkedin.com/company/pseg
+- type: GitHubOrganization
+  url: https://github.com/PSEGLI
+  name: PSEG Long Island — first-party org, zero public repositories
 - type: Login
   url: https://nj.myaccount.pseg.com/user/login
+- type: Support
+  url: https://nj.myaccount.pseg.com/customersupport
+  name: Customer support, PSE&G New Jersey
+- type: Support
+  url: https://www.psegliny.com/en/myaccount/customersupport
+  name: Customer support, PSEG Long Island
+- type: TermsOfService
+  url: https://corporate.pseg.com/websitetermsandconditions
+- type: PrivacyPolicy
+  url: https://corporate.pseg.com/websitetermsandconditions
+  name: Privacy Policy, published on the Website Terms & Conditions page (last updated 2025-01-15)
+- type: Rates
+  url: https://nj.pseg.com/aboutpseg/regulatorypage/electrictariffs
+  name: PSE&G New Jersey electric tariffs — filed rate schedules, not data
 - type: Documentation
   url: https://www.psegliny.com/myaccount/serviceandrates/mysmartenergy
 - type: Documentation

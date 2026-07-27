@@ -1,0 +1,61 @@
+generated: '2026-07-27'
+method: searched
+source: registry searches of npm, PyPI and GitHub on 2026-07-27
+official_sdks: 0
+summary: >-
+  PSEG ships NO first-party client libraries in any language, and it has no published API for one to
+  wrap. npm returns zero packages for "pseg". PyPI has exactly one, and it is community work. There
+  is a GitHub organization — github.com/PSEGLI, "PSEG Long Island", contact
+  DL-PSEGLI-GitHub-Support@pseg.com, created 2018-06-11 — but it has ZERO public repositories, so it
+  hosts no SDK, no spec and no sample code. api.github.com/orgs/pseg is a 404 (no PSE&G / parent-company
+  org). What exists on the registries is reverse-engineered customer-portal automation written by
+  individuals, recorded here as such: both packages log in AS the customer with pseg.com credentials
+  rather than calling any documented API, which is the practical consequence of the closed posture
+  described in review.yml.
+github_organizations:
+- url: https://github.com/PSEGLI
+  name: PSEG Long Island
+  first_party: true
+  verified_badge: false
+  contact: DL-PSEGLI-GitHub-Support@pseg.com
+  location: 999 Stewart Ave. Bethpage, NY 11714
+  created: '2018-06-11'
+  public_repos: 0
+  note: >-
+    First-party by the @pseg.com contact address, the PSEG Long Island headquarters address and the
+    www.psegliny.com website field, but empty — eight years old with nothing published. There is no
+    parent-company org: https://api.github.com/orgs/pseg returns 404.
+packages:
+- language: python
+  registry: pypi
+  name: pseg
+  version_seen: 0.1.1
+  url: https://pypi.org/project/pseg/
+  install: pip install pseg
+  repository: https://github.com/bvlaicu/pseg/
+  author: Bogdan Vlaicu (community)
+  official: false
+  last_pushed: '2019-11-04'
+  description: >-
+    Community Python utility that reads a PSE&G GAS meter reading by authenticating as the customer
+    against the PSE&G web portal. Not an API client — there is no PSE&G API for it to call. Unmaintained
+    since 2019. Same author as the community `coned` package for Con Edison.
+- language: python
+  registry: github
+  name: ha-psegli
+  url: https://github.com/daswass/ha-psegli
+  repository: https://github.com/daswass/ha-psegli
+  author: daswass (community)
+  official: false
+  last_pushed: '2026-06-14'
+  stars: 14
+  description: >-
+    Home Assistant custom integration for PSEG Long Island. Distributed through the repository /
+    HACS rather than a package registry. Scrapes the logged-in PSEG Long Island customer portal to
+    surface usage in Home Assistant — the same customer-credential pattern, and the only actively
+    maintained programmatic path into PSEG data that exists anywhere.
+sdks: []
+note: >-
+  No `SDKs` pointer is wired in apis.yml: there is no official client library, in any language, from
+  either PSE&G or PSEG Long Island. Recording the community packages is evidence of demand meeting a
+  closed surface, not evidence of an SDK program.
