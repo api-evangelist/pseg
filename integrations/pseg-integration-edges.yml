@@ -1,0 +1,33 @@
+edges:
+- partner_name: Arcadia
+  partner: arcadia-power
+  channel: partner-built
+  direction: partner-built
+  operations:
+  - statements
+  - statement-history
+  - web-navigation
+  - intervals
+  - interval-history
+  contract_reference:
+    list: Arcadia Plug provider coverage (public list)
+    spec_file: null
+    listed_name: Public Service Enterprise Group - New Jersey (PSE&G)
+    listed_id: prv_36e1b9a1-ea0a-11e0-b6bb-12313d2b6294
+    matched_domain: pseg.com
+    service_types:
+    - Other Service Type
+    - Lighting
+    - Electric
+    - Natural Gas
+    detected_by: sweep-energy.py
+    detected: '2026-10-13'
+  type: coverage
+  relationship: system-coverage
+  evidence: https://api.arcadia.com/plug/providers/public
+  detected_by: sweep-energy.py
+  first_seen: '2026-10-13'
+generated: '2026-10-13'
+method: searched
+checked:
+- https://api.arcadia.com/plug/providers/public
