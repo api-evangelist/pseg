@@ -2,6 +2,13 @@
   "repo": "pseg",
   "feeds": [
     {
+      "source": "https://corporate.pseg.com/newsroom",
+      "feed_url": "https://corporate.pseg.com/newsroom",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
       "source": "https://corporate.pseg.com/",
       "feed_url": "https://corporate.pseg.com/",
       "title": "",
@@ -10,5 +17,5 @@
     }
   ],
   "post_count": 0,
-  "fetched": "2026-10-03T12:30:02Z"
+  "fetched": "2026-10-10T13:15:00Z"
 }
